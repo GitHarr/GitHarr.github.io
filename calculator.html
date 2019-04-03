@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <title>ROI Calculator</title>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script>
+    function Calculate() {
+        var odd = document.getElementById("iQBHoursSpent").value;
+        var probability = document.getElementById("iQBEmployeeHourly").value;
+        var findAmericanPositive = "+";
+        var findAmericanNegative = "-";
+        if (isNaN(odd)) {
+            document.getElementById("iQBHoursSpent").value = "Enter Valid Number";
+        }
+        if (isNaN(probability)) {
+            document.getElementById("iQBEmployeeHourly").value = "Enter Valid Number";
+        }
+        if (odd.toString().indexOf(findAmericanPositive) > -1) {
+            odd = (odd / 100) + 1;
+        }
+        if (odd.toString().indexOf(findAmericanNegative) > -1) {
+            odd = (100 / Math.abs(odd)) + 1;
+        }
+        var winnings = odd * probability / 100 * 100;
+        var roi = (winnings / 100 - 1) * 100;
+        roi = Math.round((roi + 0.00001) * 100) / 100;
+        if (roi == -1) {
+            document.getElementById("result").innerHTML = "";
+        }
+        document.getElementById("result").value = roi;
+    }
+    </script>
+    <style>
+        #roi-calculator h3 .label-primary,
+        #roi-calculator h1 .label-warning {
+            display: block;
+            width: 100%;
+            white-space: normal;
+        }
+        #step1 {
+            margin-left: 30%
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container well" id="roi-calculator">
+        <form id="roi-form">
+            <div class="row">
+                <div class="col-md-12  text-center">
+                    <h2>ROI Calculator</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div id="step1" class="col-md-5">
+                    <h3><span class="label label-primary">ROI Calculator</span></h3>
+                    <br /><br /><br />
+                    <div class="form-group">
+                        <label for="iQBHoursSpent">Odds:</label>
+                        <span class="input-group-addon">Decimal/US</span>
+                        <input class="form-control" id="iQBHoursSpent" name="iQBHoursSpent" type="number" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="iQBEmployeeHourly">Probability of winning:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">%</span>
+                            <input class="form-control" id="iQBEmployeeHourly" name="iQBEmployeeHourly" type="number"
+                                min="0" required />
+                        </div>
+                    </div>
+                    <div>
+                        <button type="button" onclick="Calculate()" class="btn btn-success">Calculate</button>
+                    </div>
+                    <div class="form-group">
+                        <label for="result">Return of investment:</label>
+                        <div class="input-group">
+                            <span class="input-group-addon">%</span>
+                            <input class="form-control" id="result" name="result" type="number"
+                                min="0" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">&nbsp;</div>
+        <div class="col-md-8 text-center"><br /><strong>ROI Calculator by odds and probability of winning</strong></div>
+        <div class="col-md-2">&nbsp;</div>
+    </div>
+    </form>
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript">
+        $(document).ready(function () {
+            // ROICalculator('#roi-calculator');
+        });
+    </script> -->
+</body>
+
+</html>
